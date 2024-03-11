@@ -46,7 +46,7 @@ public class OrganizationService {
 
     public void delete(Long id) {
         Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id \" + id"));
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
         organizationRepository.delete(organization);
     }
 }
