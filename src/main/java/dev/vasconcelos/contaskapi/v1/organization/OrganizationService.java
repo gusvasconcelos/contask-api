@@ -22,13 +22,9 @@ public class OrganizationService {
     }
 
     public OrganizationResponseDTO findById(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
-        }
-
         return organizationRepository.findById(id)
-        .map(OrganizationResponseDTO::new)
-        .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
+            .map(OrganizationResponseDTO::new)
+            .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
     }
 
     public OrganizationRequestDTO save(Organization organization) {

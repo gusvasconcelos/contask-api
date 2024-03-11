@@ -29,7 +29,7 @@ public class OrganizationController {
     }
 
     @GetMapping(value = "/{id}")
-    public OrganizationResponseDTO findById(Long id) {
+    public OrganizationResponseDTO findById(@PathVariable("id") Long id) {
         return organizationService.findById(id);
     }
 
