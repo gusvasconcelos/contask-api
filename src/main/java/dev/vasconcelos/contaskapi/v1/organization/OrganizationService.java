@@ -28,39 +28,25 @@ public class OrganizationService {
     }
 
     public OrganizationRequestDTO save(Organization organization) {
-        if (organization == null) {
-            throw new IllegalArgumentException("Organization cannot be null");
-        }
-
         return new OrganizationRequestDTO(organizationRepository.save(organization));
     }
 
     public OrganizationRequestDTO update(Long id, Organization organization) {
-        if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
-        }
-
-        if (organization == null) {
-            throw new IllegalArgumentException("Organization cannot be null");
-        }
-
         return organizationRepository.findById(id)
-        .map(entity -> {
+            .map(entity -> {
             entity.setName(organization.getName());
             entity.setEmail(organization.getEmail());
             entity.setPhoneNumber(organization.getPhoneNumber());
             entity.setCnpj(organization.getCnpj());
             entity.setImageUrl(organization.getImageUrl());
             return new OrganizationRequestDTO(organizationRepository.save(entity));
-        })
-        .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
+            })
+            .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
     }
 
     public void delete(Long id) {
-        if (id == null) {
-            throw new IllegalArgumentException("Id cannot be null");
-        }
-
-        organizationRepository.deleteById(id);
+        Organization organization = organizationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id \" + id"));
+        organizationRepository.delete(organization);
     }
 }
