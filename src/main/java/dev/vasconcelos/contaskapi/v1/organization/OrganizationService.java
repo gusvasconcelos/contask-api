@@ -21,9 +21,8 @@ public class OrganizationService {
         return organizationRepository.findAll().stream().map(OrganizationResponseDTO::new).collect(Collectors.toList());
     }
 
-    public OrganizationResponseDTO findById(Long id) {
+    public Organization findById(Long id) {
         return organizationRepository.findById(id)
-            .map(OrganizationResponseDTO::new)
             .orElseThrow(() -> new ResourceNotFoundException("Organization not found with id " + id));
     }
 

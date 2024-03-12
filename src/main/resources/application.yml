@@ -7,3 +7,6 @@ spring:
         hibernate:
             ddl-auto: none
         show-sql: false
+
+server:
+    port: ${PORT:8080}
